@@ -1,0 +1,19 @@
+# Konfigurasi build & run untuk Railway (Nixpacks) — Laravel + SQLite.
+providers = ["php"]
+
+[phases.setup]
+nixPkgs = ["php83", "php83Packages.composer", "nodejs_20"]
+
+[phases.install]
+cmds = [
+  "composer install --no-dev --optimize-autoloader --no-interaction"
+]
+
+[phases.build]
+cmds = [
+  "mkdir -p database",
+  "touch database/database.sqlite"
+]
+
+[start]
+cmd = "sh ./deploy-start.sh"
