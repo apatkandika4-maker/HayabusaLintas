@@ -1,10 +1,14 @@
 # Konfigurasi build & run untuk Railway (Nixpacks) — Laravel + SQLite.
+# Aplikasi ini TIDAK butuh Node/npm (pakai Bootstrap CDN), jadi hanya PHP.
 providers = ["php"]
 
 [phases.setup]
-nixPkgs = ["php83", "php83Packages.composer", "nodejs_20"]
+nixPkgs = ["php83", "php83Packages.composer"]
+# Kosongkan apt & matikan deteksi Node.
+aptPkgs = []
 
 [phases.install]
+# Hanya composer. Timpa default agar npm tidak pernah dijalankan.
 cmds = [
   "composer install --no-dev --optimize-autoloader --no-interaction"
 ]
